@@ -1,6 +1,6 @@
 # Time Bank
 Przykładowa aplikacja RESTowa pełniąca rolę banku czasu. </br>
-Zaprojektowane API pozwala na: złożenie oferty, pobranie oferty, </br> sprawdzenie bilansu.
+Zaprojektowane API pozwala na: złożenie oferty, pobranie oferty, sprawdzenie bilansu.
 ##### Budowa części klienckiej
 Instalacja lokalnych instancji node oraz npm:
 ```
