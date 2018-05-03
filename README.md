@@ -4,7 +4,7 @@ Zaprojektowane API pozwala na: złożenie oferty, pobranie oferty, sprawdzenie b
 ##### Budowa części klienckiej
 Instalacja lokalnych instancji node oraz npm:
 ```
-mvn frontend:npm
+mvn frontend:install-node-and-npm
 ```
 Instalacja wszystkich bibliotek node modules zawartych w package.json:
 ```
