@@ -1,5 +1,7 @@
 package com.github.kamilcieslik.academic.time_bank_backend.database.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.util.Date;
@@ -46,6 +48,7 @@ public class Offer {
             CascadeType.REFRESH})
     @JoinColumn(name = "giver_id")
     @XmlElement(name = "giver")
+    @JsonIgnore
     private User giver;
 
     @ManyToOne(cascade = {CascadeType.DETACH,
@@ -54,6 +57,7 @@ public class Offer {
             CascadeType.REFRESH})
     @JoinColumn(name = "receiver_id")
     @XmlElement(name = "receiver")
+    @JsonIgnore
     private User receiver;
 
     public Offer() {
