@@ -1,19 +1,21 @@
-package com.github.kamilcieslik.academic.time_bank_backend.database.service.impl;
+package com.github.kamilcieslik.academic.time_bank_backend.database.service;
 
-import com.github.kamilcieslik.academic.time_bank_backend.database.entity.User;
+import com.github.kamilcieslik.academic.time_bank_backend.entity.User;
 import com.github.kamilcieslik.academic.time_bank_backend.database.repository.UserRepository;
-import com.github.kamilcieslik.academic.time_bank_backend.database.service.UserService;
+import com.github.kamilcieslik.academic.time_bank_backend.time_bank_services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+@Qualifier("database")
+public class UserDbServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserDbServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

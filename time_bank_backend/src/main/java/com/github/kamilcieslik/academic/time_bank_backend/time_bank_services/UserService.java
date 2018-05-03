@@ -1,6 +1,6 @@
-package com.github.kamilcieslik.academic.time_bank_backend.database.service;
+package com.github.kamilcieslik.academic.time_bank_backend.time_bank_services;
 
-import com.github.kamilcieslik.academic.time_bank_backend.database.entity.User;
+import com.github.kamilcieslik.academic.time_bank_backend.entity.User;
 
 public interface UserService extends CRUDService<User> {
     User findByLogin(String login);

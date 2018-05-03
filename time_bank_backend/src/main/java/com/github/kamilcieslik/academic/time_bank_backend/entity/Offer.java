@@ -1,4 +1,4 @@
-package com.github.kamilcieslik.academic.time_bank_backend.database.entity;
+package com.github.kamilcieslik.academic.time_bank_backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

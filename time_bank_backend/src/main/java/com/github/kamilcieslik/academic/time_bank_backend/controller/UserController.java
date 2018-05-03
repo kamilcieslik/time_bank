@@ -1,8 +1,10 @@
 package com.github.kamilcieslik.academic.time_bank_backend.controller;
 
-import com.github.kamilcieslik.academic.time_bank_backend.database.entity.User;
-import com.github.kamilcieslik.academic.time_bank_backend.database.service.UserService;
+import com.github.kamilcieslik.academic.time_bank_backend.TimeBankApplication;
+import com.github.kamilcieslik.academic.time_bank_backend.entity.User;
+import com.github.kamilcieslik.academic.time_bank_backend.time_bank_services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -13,7 +15,7 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(@Qualifier(TimeBankApplication.READ_WRITE_MODE) UserService userService) {
         this.userService = userService;
     }
 
@@ -37,9 +39,29 @@ public class UserController {
         return userService.checkUserExists(login, email);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/update/{id}", produces = {APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.POST, value = "/save/", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    public User save(@RequestBody User user) {
+        return userService.save(user);
+    }
+
+    /*
+    @RequestMapping(method = RequestMethod.POST, value = "/save/", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    public JSONObject save(@RequestBody String stringToParse) {
+        JSONParser parser = new JSONParser();
+        JSONObject json = null;
+        try {
+            json = (JSONObject) parser.parse(stringToParse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(json);
+        return json;
+    }*/
+
+    @RequestMapping(method ={RequestMethod.GET, RequestMethod.PUT}, value = "/update/{id}", produces = {APPLICATION_JSON_VALUE})
     public User update(@PathVariable Integer id, @RequestBody User updatedUser) {
         User user = userService.find(id);
+
         if (updatedUser.getFirstName() != null)
             user.setFirstName(updatedUser.getFirstName());
         if (updatedUser.getLastName() != null)
