@@ -1,0 +1,50 @@
+<div id="new-event">
+  <form>
+    <div class="jumbotron">
+      <h2 class="text-center">Uzupełnij dane wydarzenia</h2>
+      <div class="form-group">
+        <label class="control-label" for="name-input">Nazwa</label>
+        <input class="form-control" [(ngModel)]="event.name"  type="text" name="name-input" id="name-input">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="description-input">Opis </label>
+        <input class="form-control" [(ngModel)]="event.description" name="description-input" id="description-input">
+      </div>
+      <div class="form-group" id="date_from">
+        <label class="control-label" for="date_from">Data rozpoczęcia</label>
+        <input type="date" [ngModel] ="event.dateFrom | date:'yyyy-MM-dd'" (ngModelChange)="event.dateFrom = $event" name="dateFrom-input">
+      </div>
+      <div class="form-group" id="date_to">
+        <label class="control-label" for="date_to">Data zakończenia</label>
+        <input type="date" [ngModel] ="event.dateTo | date:'yyyy-MM-dd'" (ngModelChange)="event.dateTo = $event" name="dateTo-input">
+        <h3 class="text-center">Lokalizacja </h3></div>
+      <div class="form-group">
+        <label class="control-label" for="street-input">Ulica </label>
+        <input class="form-control" [(ngModel)]="address.street" type="text" name="street-input" id="street-input">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="city-input">Miasto </label>
+        <input class="form-control" [(ngModel)]="address.city" type="text" name="city-input" id="city-input">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="postalCode-input">Kod pocztowy</label>
+        <input class="form-control" [(ngModel)]="address.postalCode" type="text" name="postalCode-input" id="postalCode-input">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="country-input">Państwo</label>
+        <input class="form-control" [(ngModel)]="address.country" type="text" name="postalCode-input" id="country-input">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="file-input">Zdjęcie</label>
+        <input type="file" name="file-input" id="file-input">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="private-input">Prywatne wydarzenie</label>
+        <input type="checkbox" [(ngModel)]="address.isPrivate" name="private-input" id="private-input">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success" (click)="createEvent()">Utwórz</button>
+      </div>
+    </div>
+  </form>
+</div>

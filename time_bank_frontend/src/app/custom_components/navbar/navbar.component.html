@@ -1,0 +1,47 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand navbar-link"><img src="../../../assets/img/app_logo_mini.png" id="logo"><strong
+                    id="logo_name">{{currentModuleName}}</strong></a>
+            <button [ngStyle]="{'background-color' : (isCollapsed === true) ? '#2c827f' : '#125553'}"
+                    class="navbar-toggle navbar-collapse btn" (click)="isCollapsed=!isCollapsed"><span
+                    class="sr-only">Toggle navigation</span><span class="navcol-1"></span><span
+                    class="icon-bar"></span><span
+                    class="icon-bar"></span></button>
+
+            <img id="btn_friends_invitations" style="cursor: pointer"
+                 src="../../../assets/img/navbar_button_icons/friends_without_alert.png">
+            <img id="btn_push_notifications" style="cursor: pointer"
+                 src="../../../assets/img/navbar_button_icons/notification_without_alert.png">
+        </div>
+
+        <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li [ngClass]="{'active' : activeMenu === 'Mapa'}" role="option"
+                    (click)="this.router.navigateByUrl('/map')">
+                    <a style="cursor: pointer">Mapa </a></li>
+                <li [ngClass]="{'active' : activeMenu === 'Grupy'}" role="option"
+                    (click)="this.router.navigateByUrl('/groups')">
+                    <a style="cursor: pointer">Grupy </a></li>
+                <li [ngClass]="{'active' : activeMenu === 'Znajomi'}" role="option"
+                    (click)="this.router.navigateByUrl('/friends')">
+                    <a style="cursor: pointer">Znajomi </a></li>
+                <li [ngClass]="{'active' : activeMenu === 'Wydarzenia'}" role="option"
+                    (click)="this.router.navigateByUrl('/events')">
+                    <a style="cursor: pointer">Wydarzenia </a></li>
+                <li [ngClass]="{'active' : activeMenu === 'Zainteresowania'}" role="option"
+                    (click)="this.router.navigateByUrl('/hashtags')">
+                    <a style="cursor: pointer">Zainteresowania </a></li>
+                <li [ngClass]="{'active' : activeMenu === 'Historia'}" role="option"
+                    (click)="this.router.navigateByUrl('/history')">
+                    <a style="cursor: pointer">Historia </a></li>
+                <li [ngClass]="{'active' : activeMenu === 'Profil'}" role="option"
+                    (click)="this.router.navigateByUrl('/profile')">
+                    <a style="cursor: pointer">Profil </a></li>
+                <li [ngClass]="{'active' : activeMenu === 'Wyloguj'}" role="option"
+                    (click)="this.router.navigateByUrl('/logout')">
+                    <a style="cursor: pointer">Wyloguj </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

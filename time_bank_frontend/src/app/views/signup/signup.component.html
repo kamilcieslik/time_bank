@@ -1,0 +1,51 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand navbar-link"><img src="../../../assets/img/app_logo_mini.png" id="logo"><strong>Let's
+                come out</strong></a>
+        </div>
+    </div>
+</nav>
+<form class="form-horizontal">
+    <fieldset>
+        <div class="col-md-12 text-center">
+            <legend><h2>Rejestracja</h2></legend>
+
+            <h4><span class="label label-primary">Login</span></h4>
+            <input class="form-control element-size center-block" type="text" name="login" [(ngModel)]="user.login">
+
+            <h4><span class="label label-primary">Hasło</span></h4>
+            <input class="form-control element-size center-block" type="password" name="password" [(ngModel)]="user.password">
+
+            <h4><span class="label label-primary">Email</span></h4>
+            <input class="form-control element-size center-block" type="email" name="email" [(ngModel)]="user.email">
+
+            <h4><span class="label label-primary">Imię</span></h4>
+            <input class="form-control element-size center-block" type="text" name="firstName" [(ngModel)]="user.firstName">
+
+            <h4><span class="label label-primary">Nazwisko</span></h4>
+            <input class="form-control element-size center-block" type="text" name="lastName" [(ngModel)]="user.lastName">
+
+            <h4><span class="label label-primary">Telefon</span></h4>
+            <input class="form-control element-size center-block" type="tel" name="phoneNumber" [(ngModel)]="user.phoneNumber">
+
+            <h4><span class="label label-primary">Adres</span></h4>
+            <input class="form-control element-size center-block" type="text" name="street" [(ngModel)]="address.street">
+
+            <h4><span class="label label-primary">Miejscowość</span></h4>
+            <input class="form-control element-size center-block" type="text" name="city" [(ngModel)]="address.city">
+
+            <h4><span class="label label-primary">Kod pocztowy</span></h4>
+            <input class="form-control element-size center-block" type="text" name="postal_code" [(ngModel)]="address.postalCode">
+
+            <h4><span class="label label-primary">Kraj</span></h4>
+            <input class="form-control element-size center-block" type="text" name="country" [(ngModel)]="address.country">
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-success element-size" type="submit" (click)="saveUser()">Zarejestruj</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

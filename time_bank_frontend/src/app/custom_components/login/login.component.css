@@ -1,0 +1,30 @@
+#logo{
+    display:block;
+    max-height:200px;
+    margin-top:30px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#login{
+    margin-top:100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#minilogo{
+    max-height:42px;
+    margin-right:10px;
+    margin-top:-12px;
+    display:inline-block;
+}
+
+button.btn{
+    margin-top:15px;
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.element-size{
+    width:200px;
+}

@@ -1,0 +1,107 @@
+* {
+    border-radius: 0 !important;
+}
+
+#logo {
+    max-height: 38px;
+    margin-right: 10px;
+    margin-top: -9px;
+    display: inline-block;
+}
+
+.navbar-header{
+    width: calc(100% - 560px);
+}
+
+#btn_friends_invitations {
+    max-height: 26px;
+    margin-right: -6px;
+    margin-top: 5px;
+    display: inline-block;
+    float:right;
+}
+
+#btn_push_notifications {
+    max-height: 26px;
+    margin-right: 14px;
+    margin-top: 5px;
+    display: inline-block;
+    float:right;
+}
+
+#logo_name {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+.navbar .navbar-brand, .navbar-nav > li > a {
+    padding: 10px 8px;
+    text-align: center;
+    color: white;
+}
+
+.navbar .navbar-brand {
+    height: 40px
+}
+
+.navbar .navbar-toggle {
+    width: 36px;
+    margin: 9px -26px 6px 0;
+    padding: 6px 7px 6px 7px;
+    border-style: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.navbar {
+    min-height: 40px;
+    margin: 0;
+    background-color: #2c827f;
+    border-color: #2c827f;
+}
+
+.navbar .navbar-nav > .active > a,
+.navbar .navbar-nav a:hover{
+    background: #157876;
+}
+
+@media only screen and (max-width: 767px) {
+    .navbar-header{
+        width: 100%;
+    }
+
+    .navbar .navbar-collapse {
+        background-color: #434343;
+    }
+
+    .navbar .navbar-nav {
+        margin-top: -1px;
+        margin-bottom: 0;
+    }
+
+    .navbar .navbar-nav a{
+        margin: 0;
+        width: 100%;
+        line-height: 9px;
+        border-top: 1px solid;
+        border-color: #000000;
+    }
+
+    .navbar .navbar-nav > .active > a,
+    .navbar .navbar-nav a:hover{
+        background: #515151;
+    }
+
+    #btn_friends_invitations {
+        margin-right: 10px;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    #logo {
+      display: none;
+    }
+}

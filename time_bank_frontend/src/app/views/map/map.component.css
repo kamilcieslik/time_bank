@@ -1,0 +1,130 @@
+ul#listgroup {
+    max-height: 240px;
+    overflow-y:scroll;
+    padding: 0;
+    margin: 0 0 40px;
+    opacity: 0.85;
+}
+
+agm-map {
+    height: calc(100% - 40px);
+    width: 100%;
+}
+
+div#drop_down_list_of_events {
+    background-color: transparent;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+div#events_buttons {
+    background-color: #2c827f;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+button#btn_all_events, button#btn_new_event {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #fa8256;
+
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+
+    border: 1px solid #000000;
+    border-radius: 0;
+}
+
+button#btn_all_events:after {
+    content: "Wszystkie wydarzenia";
+}
+
+button#btn_new_event:after {
+    content: "Utwórz wydarzenie";
+}
+
+img#btn_map_view_mode {
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+img#btn_rollup_events {
+    width: 35px;
+    height: 25px;
+}
+
+@media only screen and (max-width: 451px) {
+    div#events_buttons {
+        height: 60px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    ul#listgroup {
+        margin-bottom: 60px;
+    }
+
+    div#drop_down_list_of_events {
+        margin-bottom: 70px;
+    }
+
+    button#btn_all_events, button#btn_new_event {
+        font-size: 14px;
+    }
+
+    button#btn_all_events:after {
+        content: "Wszystkie \A wydarzenia";
+        white-space: pre;
+    }
+
+    button#btn_new_event:after {
+        content: "Utwórz \A wydarzenie";
+        white-space: pre;
+    }
+
+    img#btn_map_view_mode {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    agm-map {
+        height: calc(100% - 60px);
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    button#btn_all_events, button#btn_new_event {
+        font-size: 12px;
+    }
+
+    div#events_buttons {
+        height: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    ul#listgroup {
+        margin-bottom: 50px;
+    }
+
+    div#drop_down_list_of_events {
+        margin-bottom: 60px;
+    }
+
+
+    agm-map {
+        height: calc(100% - 50px);
+    }
+}
+

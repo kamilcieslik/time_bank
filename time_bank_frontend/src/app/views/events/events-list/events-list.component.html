@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Events List</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>dateFrom</th>
+      <th>dateTo</th>
+      <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let event of events">
+      <td>{{ event.name}}</td>
+      <td>{{ event.dateFrom }}</td>
+      <td>{{ event.dateTo }}</td>
+      <td>{{ event.description }}</td>
+      <td><button class="btn btn-danger" (click)="deleteUser(event)"> usuń wydarzenie</button></td>
+      <td><a [routerLink]="['/selected-event', event.id]" class="btn btn-info">edytuj wydarzenie</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
