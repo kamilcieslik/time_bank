@@ -1,0 +1,26 @@
+<app-navbar activeMenu="Otrzymany czas"></app-navbar>
+
+<div id="offers_list" class="container">
+  <h1>Otrzymany czas</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Rozpoczęcie</th>
+      <th>Zakończenie</th>
+      <th>Otrzymany czas</th>
+      <th>Otrzymano od</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let offer of offers">
+      <td>{{ offer.name}}</td>
+      <td>{{ offer.dateFrom | date : "dd.MM.y hh:mm"}}</td>
+      <td>{{ offer.dateTo | date : "dd.MM.y hh:mm"}}</td>
+      <td>{{ calculateTime(offer.dateFrom, offer.dateTo) }}</td>
+      <td> {{getGiver(offer.giver)}} </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

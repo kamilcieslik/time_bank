@@ -1,0 +1,32 @@
+<app-navbar activeMenu="Dostępne oferty"></app-navbar>
+
+<div id="offers_list" class="container">
+  <h1>Dostępne oferty</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Opis</th>
+      <th>Rozpoczęcie</th>
+      <th>Zakończenie</th>
+      <th>Adres</th>
+      <th>Typ</th>
+      <th>Właściciel</th>
+      <th>Akcja</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let offer of offers">
+      <td>{{ offer.name}}</td>
+      <td>{{ offer.description }}</td>
+      <td>{{ offer.dateFrom | date : "dd.MM.y hh:mm"}}</td>
+      <td>{{ offer.dateTo | date : "dd.MM.y hh:mm"}}</td>
+      <td>{{ offer.address }}</td>
+      <td> {{getOfferType(offer.type)}} </td>
+      <td> {{getOwner(offer.giver, offer.receiver)}} </td>
+      <td><button class="btn btn-danger" (click)="enroll(offer.id)">ZAPISZ SIĘ</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

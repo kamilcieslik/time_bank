@@ -1,0 +1,26 @@
+<app-navbar activeMenu="Zaoferowany czas"></app-navbar>
+
+<div id="offers_list" class="container">
+  <h1>Zaoferowany czas</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Rozpoczęcie</th>
+      <th>Zakończenie</th>
+      <th>Przekazany czas czas</th>
+      <th>Odbiorca czasu</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let offer of offers">
+      <td>{{ offer.name}}</td>
+      <td>{{ offer.dateFrom | date : "dd.MM.y hh:mm"}}</td>
+      <td>{{ offer.dateTo | date : "dd.MM.y hh:mm"}}</td>
+      <td>{{ calculateTime(offer.dateFrom, offer.dateTo) }}</td>
+      <td>{{getReceiver(offer.receiver)}} </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
