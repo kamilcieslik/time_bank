@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 @Qualifier("file")
@@ -116,6 +117,43 @@ public class OfferXmlServiceImpl implements OfferService {
                     givenTimeSeconds, takenTimeDays, takenTimeHours, takenTimeMinutes, takenTimeSeconds);
         } catch (JAXBException e) {
            return null;
+        }
+    }
+
+    @Override
+    public List<Offer> findActiveOffers(User user) {
+        try {
+            Database database = DatabaseXmlParser.readFromXmlFile();
+            return database.findOffersWhereGiverIsNullOrReceiverIsNull(user).stream()
+                    .filter(offer -> ((offer.getType() && !offer.getGiver().getId().equals(user.getId()))
+                            || !offer.getType() && !offer.getReceiver().getId().equals(user.getId())))
+                    .collect(Collectors.toList());
+        } catch (JAXBException ignored) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Offer> findGivenOffers(User user) {
+        try {
+            Database database = DatabaseXmlParser.readFromXmlFile();
+            return database.getOffers().stream()
+                    .filter(offer -> offer.getType() && offer.getGiver().getId().equals(user.getId()))
+                    .collect(Collectors.toList());
+        } catch (JAXBException ignored) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Offer> findTakenOffers(User user) {
+        try {
+            Database database = DatabaseXmlParser.readFromXmlFile();
+            return database.getOffers().stream()
+                    .filter(offer -> !offer.getType() && offer.getReceiver().getId().equals(user.getId()))
+                    .collect(Collectors.toList());
+        } catch (JAXBException ignored) {
+            return null;
         }
     }
 }

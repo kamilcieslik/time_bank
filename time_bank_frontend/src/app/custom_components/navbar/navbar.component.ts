@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 export class NavbarComponent implements OnInit {
     @Input() activeMenu: string;
     isCollapsed: boolean;
-    currentModuleName = "Let's come out";
+    currentModuleName = "Time Bank";
 
     constructor(private router: Router) {
         this.isCollapsed = true;
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
         else if (window.innerWidth < 875)
             this.currentModuleName = "";
         else
-            this.currentModuleName = "Let's come out";
+            this.currentModuleName = "Time Bank";
     }
 
     @HostListener('window:resize', ['$event'])
@@ -31,6 +31,6 @@ export class NavbarComponent implements OnInit {
         else if (event.target.innerWidth < 875)
             this.currentModuleName = "";
         else
-            this.currentModuleName = "Let's come out";
+            this.currentModuleName = "Time Bank";
     }
 }

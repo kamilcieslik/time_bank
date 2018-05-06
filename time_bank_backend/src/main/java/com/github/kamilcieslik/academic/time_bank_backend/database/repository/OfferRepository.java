@@ -9,4 +9,5 @@ import java.util.List;
 public interface OfferRepository extends JpaRepository<Offer, Integer> {
     List<Offer> findOffersByGiver(User giver);
     List<Offer> findOffersByReceiver(User receiver);
+    List<Offer> findOffersByGiverIsNullOrReceiverIsNull();
 }

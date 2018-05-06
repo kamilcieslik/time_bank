@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../dto/user.model';
-import {Address} from '../../dto/address.model';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user/user.service';
 @Component({
@@ -10,15 +9,14 @@ import {UserService} from '../../services/user/user.service';
 })
 export class SignupComponent implements OnInit {
 
-  address: Address = new Address();
   user: User = new User();
 
   constructor( private router: Router, private userService: UserService) { }
 
   ngOnInit() {
   }
+
   saveUser() {
-      this.user.address = this.address;
       this.userService.checkIfExist(this.user.login, this.user.email).then(
           (val) => {
               if (!val) {

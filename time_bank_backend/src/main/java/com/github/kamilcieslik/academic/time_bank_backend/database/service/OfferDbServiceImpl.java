@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 @Qualifier("database")
@@ -80,5 +81,32 @@ public class OfferDbServiceImpl implements OfferService {
 
         return new Statistics(numberOfGivenOffers, numberOfTakenOffers, givenTimeDays, givenTimeHours, givenTimeMinutes,
                 givenTimeSeconds, takenTimeDays, takenTimeHours, takenTimeMinutes, takenTimeSeconds);
+    }
+
+    @Override
+    public List<Offer> findActiveOffers(User user) {
+        System.out.println(user);
+        try {
+            return offerRepository.findOffersByGiverIsNullOrReceiverIsNull().stream()
+                    .filter(offer -> ((offer.getType() && (offer.getGiver()==null || !offer.getGiver().getId().equals(user.getId())))
+                            || !offer.getType() && (offer.getReceiver()==null || !offer.getReceiver().getId().equals(user.getId())))).collect(Collectors.toList());
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<Offer> findGivenOffers(User user) {
+        return offerRepository.findAll().stream()
+                .filter(offer -> offer.getGiver()!=null && offer.getGiver().getId().equals(user.getId()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Offer> findTakenOffers(User user) {
+        return offerRepository.findAll().stream()
+                .filter(offer -> offer.getReceiver()!=null && offer.getReceiver().getId().equals(user.getId()))
+                .collect(Collectors.toList());
     }
 }

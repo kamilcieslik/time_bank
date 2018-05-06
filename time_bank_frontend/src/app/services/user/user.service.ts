@@ -8,7 +8,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
     saveUser(user: User) {
-        this.http.post('/users', user)
+        this.http.post('/users/save', user)
             .subscribe( (err) => {
                     console.log(err);
                 }
@@ -34,6 +34,7 @@ export class UserService {
         });
         return promise;
     }
+
     checkIfExist(login: string, email: string) {
         const promise = new Promise((resolve, reject) => {
             this.http.get<boolean>('/users/check', {

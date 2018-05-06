@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {User} from './dto/user.model';
 
 @Component({
     selector: 'app-root',
@@ -7,5 +6,5 @@ import {User} from './dto/user.model';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'Let\'s come out!';
+    title = 'Time Bank';
 }

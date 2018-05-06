@@ -48,7 +48,6 @@ public class Offer {
             CascadeType.REFRESH})
     @JoinColumn(name = "giver_id")
     @XmlElement(name = "giver")
-    @JsonIgnore
     private User giver;
 
     @ManyToOne(cascade = {CascadeType.DETACH,
@@ -57,7 +56,6 @@ public class Offer {
             CascadeType.REFRESH})
     @JoinColumn(name = "receiver_id")
     @XmlElement(name = "receiver")
-    @JsonIgnore
     private User receiver;
 
     public Offer() {
@@ -156,7 +154,7 @@ public class Offer {
         return receiver;
     }
 
-    public void assignReceiver(User receiver){
+    public void assignReceiver(User receiver) {
         this.receiver = receiver;
         receiver.addTimeTakenFromOther(this);
     }
@@ -167,18 +165,30 @@ public class Offer {
 
     @Override
     public String toString() {
-        return "Offer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", dateFrom=" + dateFrom +
-                ", dateTo=" + dateTo +
-                ", address='" + address + '\'' +
-                ", type=" + type +
-                ", giver=" + giver.getFirstName() + " " + giver.getLastName() + " (" + giver.getLogin() + ")" + '\'' +
-                ", receiver=" + receiver.getFirstName() + " " + receiver.getLastName() + " (" + receiver.getLogin()
-                + ")" + '\'' +
-                '}';
+        if (giver != null)
+            return "Offer{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    ", dateFrom=" + dateFrom +
+                    ", dateTo=" + dateTo +
+                    ", address='" + address + '\'' +
+                    ", type=" + type +
+                    ", giver=" + giver.getFirstName() + " " + giver.getLastName() + " (" + giver.getLogin() + ")" + '\'' +
+                    ")" + '\'' +
+                    '}';
+        else
+            return "Offer{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    ", dateFrom=" + dateFrom +
+                    ", dateTo=" + dateTo +
+                    ", address='" + address + '\'' +
+                    ", type=" + type +
+                    ", receiver=" + receiver.getFirstName() + " " + receiver.getLastName() + " (" + receiver.getLogin() +
+                    ")" + '\'' +
+                    '}';
     }
 
     @Override

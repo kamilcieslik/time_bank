@@ -39,7 +39,7 @@ public class UserController {
         return userService.checkUserExists(login, email);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/save/", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
     public User save(@RequestBody User user) {
         return userService.save(user);
     }

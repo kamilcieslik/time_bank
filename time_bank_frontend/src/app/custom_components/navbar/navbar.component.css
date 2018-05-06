@@ -10,23 +10,7 @@
 }
 
 .navbar-header{
-    width: calc(100% - 560px);
-}
-
-#btn_friends_invitations {
-    max-height: 26px;
-    margin-right: -6px;
-    margin-top: 5px;
-    display: inline-block;
-    float:right;
-}
-
-#btn_push_notifications {
-    max-height: 26px;
-    margin-right: 14px;
-    margin-top: 5px;
-    display: inline-block;
-    float:right;
+    width: calc(100% - 650px);
 }
 
 #logo_name {
@@ -93,10 +77,6 @@
     .navbar .navbar-nav > .active > a,
     .navbar .navbar-nav a:hover{
         background: #515151;
-    }
-
-    #btn_friends_invitations {
-        margin-right: 10px;
     }
 }
 

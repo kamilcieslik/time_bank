@@ -1,5 +1,7 @@
 package com.github.kamilcieslik.academic.time_bank_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class User {
             CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @XmlElementWrapper(name = "given_times_to_others")
     @XmlElement(name = "given_time_to_other")
+    @JsonIgnore
     private List<Offer> givenTimesToOthers;
 
     @OneToMany(mappedBy = "receiver", cascade = {CascadeType.DETACH,
@@ -55,6 +58,7 @@ public class User {
             CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @XmlElementWrapper(name = "times_taken_from_others")
     @XmlElement(name = "given_time_from_other")
+    @JsonIgnore
     private List<Offer> timesTakenFromOthers;
 
     public User() {

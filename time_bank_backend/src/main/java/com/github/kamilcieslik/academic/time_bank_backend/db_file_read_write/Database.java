@@ -42,14 +42,14 @@ public class Database {
         this.offers = offers;
     }
 
-    public void addUser(User user){
-        if (users==null)
+    public void addUser(User user) {
+        if (users == null)
             users = new ArrayList<>();
         users.add(user);
     }
 
-    public void addOffer(Offer offer){
-        if (offers==null)
+    public void addOffer(Offer offer) {
+        if (offers == null)
             offers = new ArrayList<>();
         offers.add(offer);
     }
@@ -58,15 +58,15 @@ public class Database {
         users.remove(user);
     }
 
-    public void deleteOffer(Offer offer){
+    public void deleteOffer(Offer offer) {
         offers.remove(offer);
     }
 
-    public User findUserById(Integer id){
+    public User findUserById(Integer id) {
         return users.stream().findFirst().filter(user -> user.getId().equals(id)).get();
     }
 
-    public Offer findOfferById(Integer id){
+    public Offer findOfferById(Integer id) {
         return offers.stream().findFirst().filter(offer -> offer.getId().equals(id)).get();
     }
 
@@ -89,5 +89,9 @@ public class Database {
 
     public List<Offer> findOffersByReceiver(User user) {
         return offers.stream().filter(offer -> offer.getReceiver().getId().equals(user.getId())).collect(Collectors.toList());
+    }
+
+    public List<Offer> findOffersWhereGiverIsNullOrReceiverIsNull(User user) {
+        return offers.stream().filter(offer -> offer.getGiver() == null || offer.getReceiver() == null).collect(Collectors.toList());
     }
 }
