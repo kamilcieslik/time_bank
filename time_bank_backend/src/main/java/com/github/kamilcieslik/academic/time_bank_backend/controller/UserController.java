@@ -29,6 +29,7 @@ public class UserController {
         return userService.findByLoginAndPassword(login, password);
     }
 
+    // Użytkownicy (GET):
     @RequestMapping(method = RequestMethod.GET, value = "/findAll", produces = {APPLICATION_JSON_VALUE})
     public Iterable<User> user() {
         return userService.findAll();
@@ -39,26 +40,14 @@ public class UserController {
         return userService.checkUserExists(login, email);
     }
 
+    // Użytkownicy (POST):
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
     public User save(@RequestBody User user) {
         return userService.save(user);
     }
 
-    /*
-    @RequestMapping(method = RequestMethod.POST, value = "/save/", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
-    public JSONObject save(@RequestBody String stringToParse) {
-        JSONParser parser = new JSONParser();
-        JSONObject json = null;
-        try {
-            json = (JSONObject) parser.parse(stringToParse);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        System.out.println(json);
-        return json;
-    }*/
-
-    @RequestMapping(method ={RequestMethod.GET, RequestMethod.PUT}, value = "/update/{id}", produces = {APPLICATION_JSON_VALUE})
+    // Użytkownicy (PUT):
+    @RequestMapping(method ={RequestMethod.PUT}, value = "/update/{id}", produces = {APPLICATION_JSON_VALUE})
     public User update(@PathVariable Integer id, @RequestBody User updatedUser) {
         User user = userService.find(id);
 
@@ -79,6 +68,7 @@ public class UserController {
         return updatedUser;
     }
 
+    // Użytkownicy (DELETE):
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE}, value = "/delete/{id}",
             produces = {APPLICATION_JSON_VALUE})
     public void delete(@PathVariable Integer id) {

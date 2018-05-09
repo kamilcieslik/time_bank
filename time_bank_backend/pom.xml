@@ -69,6 +69,12 @@
         <artifactId>json-simple</artifactId>
         <version>1.1</version>
     </dependency>
+
+    <dependency>
+        <groupId>org.jooq</groupId>
+        <artifactId>joor-java-8</artifactId>
+        <version>0.9.7</version>
+    </dependency>
 </dependencies>
 
 <build>

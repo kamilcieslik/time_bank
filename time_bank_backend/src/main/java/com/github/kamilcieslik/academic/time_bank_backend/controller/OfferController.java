@@ -34,11 +34,13 @@ public class OfferController {
         this.userService = userService;
     }
 
+    // Statystyki (GET):
     @RequestMapping(method = RequestMethod.GET, value = "/statistics/{id}", produces = {APPLICATION_JSON_VALUE})
     public Statistics user(@PathVariable Integer id) {
         return offerService.getUserStatistics(userService.find(id));
     }
 
+    // Oferty (GET):
     @RequestMapping(method = RequestMethod.GET, value = "/active/{id}")
     public List<Offer> getActiveOffers(@PathVariable Integer id) {
         return offerService.findActiveOffers(userService.find(id));
@@ -54,6 +56,7 @@ public class OfferController {
         return offerService.findTakenOffers(userService.find(id));
     }
 
+    // Oferty (PUT):
     @RequestMapping(method = RequestMethod.PUT, value = "enroll/{id}")
     public Offer signUpForAnOffer(@PathVariable Integer id, @RequestBody Integer userId) {
         Offer selectedOffer = offerService.find(id);
@@ -68,6 +71,7 @@ public class OfferController {
         return selectedOffer;
     }
 
+    // Oferty (POST):
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = {APPLICATION_JSON_VALUE})
     public Offer saveOffer(@RequestBody String stringToParse) {
         System.out.println(stringToParse);
@@ -96,5 +100,13 @@ public class OfferController {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    // Oferty (DELETE):
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE}, value = "/delete/{id}",
+            produces = {APPLICATION_JSON_VALUE})
+    public void delete(@PathVariable Integer id) {
+        Offer offer = offerService.find(id);
+        offerService.delete(offer);
     }
 }

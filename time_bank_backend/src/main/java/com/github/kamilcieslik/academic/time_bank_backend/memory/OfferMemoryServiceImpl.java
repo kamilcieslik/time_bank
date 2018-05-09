@@ -1,58 +1,26 @@
-package com.github.kamilcieslik.academic.time_bank_backend.database.service;
+package com.github.kamilcieslik.academic.time_bank_backend.memory;
 
+import com.github.kamilcieslik.academic.time_bank_backend.TimeBankApplication;
 import com.github.kamilcieslik.academic.time_bank_backend.entity.Offer;
-import com.github.kamilcieslik.academic.time_bank_backend.database.repository.OfferRepository;
 import com.github.kamilcieslik.academic.time_bank_backend.entity.User;
 import com.github.kamilcieslik.academic.time_bank_backend.entity.additional_classes.Statistics;
 import com.github.kamilcieslik.academic.time_bank_backend.time_bank_services.OfferService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Service
-@Qualifier("database")
-public class OfferDbServiceImpl implements OfferService {
-    private final OfferRepository offerRepository;
-
-    @Autowired
-    public OfferDbServiceImpl(OfferRepository offerRepository) {
-        this.offerRepository = offerRepository;
-    }
-
-    @Override
-    public List<Offer> findAll() {
-        return offerRepository.findAll();
-    }
-
-    @Override
-    public Offer save(Offer offer) {
-        return offerRepository.save(offer);
-    }
-
-    @Override
-    public void delete(Integer id) {
-        offerRepository.deleteById(id);
-    }
-
-    @Override
-    public void delete(Offer offer) {
-        offerRepository.delete(offer);
-    }
-
-    @Override
-    public Offer find(Integer id) {
-        return offerRepository.findById(id).orElse(null);
-    }
-
+@Qualifier("memory")
+public class OfferMemoryServiceImpl implements OfferService {
     @Override
     public Statistics getUserStatistics(User user) {
-        List<Offer> givenOffers = offerRepository.findOffersByGiver(user);
-        List<Offer> takenOffers = offerRepository.findOffersByReceiver(user);
+        List<Offer> givenOffers = TimeBankApplication.databaseInMemory.findOffersByGiver(user);
+        List<Offer> takenOffers = TimeBankApplication.databaseInMemory.findOffersByReceiver(user);
 
         Integer numberOfGivenOffers = givenOffers.size();
         Integer numberOfTakenOffers = takenOffers.size();
@@ -85,25 +53,18 @@ public class OfferDbServiceImpl implements OfferService {
 
     @Override
     public List<Offer> findActiveOffers(User user) {
-        System.out.println(user);
-        try {
-            return offerRepository.findOffersByGiverIsNullOrReceiverIsNull().stream()
-                    .filter(offer -> ((offer.getType()
-                            && (offer.getGiver()==null
-                            || !offer.getGiver().getId().equals(user.getId())))
-                            || !offer.getType()
-                            && (offer.getReceiver()==null
-                            || !offer.getReceiver().getId().equals(user.getId()))))
-                    .collect(Collectors.toList());
-        }
-        catch (Exception e){
-            return null;
-        }
+        return TimeBankApplication.databaseInMemory.findOffersWhereGiverIsNullOrReceiverIsNull(user).stream()
+                .filter(offer -> ((offer.getType()
+                        && (offer.getGiver()==null
+                        || !offer.getGiver().getId().equals(user.getId())))
+                        || !offer.getType() && (offer.getReceiver()==null
+                        || !offer.getReceiver().getId().equals(user.getId()))))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Offer> findGivenOffers(User user) {
-        return offerRepository.findAll().stream()
+        return TimeBankApplication.databaseInMemory.getOffers().stream()
                 .filter(offer -> offer.getGiver()!=null
                         && offer.getGiver().getId().equals(user.getId()))
                 .collect(Collectors.toList());
@@ -111,9 +72,44 @@ public class OfferDbServiceImpl implements OfferService {
 
     @Override
     public List<Offer> findTakenOffers(User user) {
-        return offerRepository.findAll().stream()
+        return TimeBankApplication.databaseInMemory.getOffers().stream()
                 .filter(offer -> offer.getReceiver()!=null
                         && offer.getReceiver().getId().equals(user.getId()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Offer> findAll() {
+        return TimeBankApplication.databaseInMemory.getOffers();
+    }
+
+    @Override
+    public Offer save(Offer entity) {
+
+        List<Offer> offers = TimeBankApplication.databaseInMemory.getOffers();
+        if (offers==null || offers.size()==0)
+            entity.setId(1);
+        else{
+            Offer offerWithTheBiggestId = offers.stream().max(Comparator.comparing(Offer::getId)).get();
+            entity.setId(offerWithTheBiggestId.getId()+1);
+        }
+
+        TimeBankApplication.databaseInMemory.addOffer(entity);
+        return entity;
+    }
+
+    @Override
+    public void delete(Integer id) {
+        TimeBankApplication.databaseInMemory.deleteOffer(TimeBankApplication.databaseInMemory.findOfferById(id));
+    }
+
+    @Override
+    public void delete(Offer entity) {
+        TimeBankApplication.databaseInMemory.deleteOffer(entity);
+    }
+
+    @Override
+    public Offer find(Integer id) {
+        return TimeBankApplication.databaseInMemory.findOfferById(id);
     }
 }

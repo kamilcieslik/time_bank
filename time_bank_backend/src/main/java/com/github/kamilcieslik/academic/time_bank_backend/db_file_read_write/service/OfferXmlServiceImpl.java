@@ -125,8 +125,11 @@ public class OfferXmlServiceImpl implements OfferService {
         try {
             Database database = DatabaseXmlParser.readFromXmlFile();
             return database.findOffersWhereGiverIsNullOrReceiverIsNull(user).stream()
-                    .filter(offer -> ((offer.getType() && !offer.getGiver().getId().equals(user.getId()))
-                            || !offer.getType() && !offer.getReceiver().getId().equals(user.getId())))
+                    .filter(offer -> ((offer.getType()
+                            && (offer.getGiver()==null
+                            || !offer.getGiver().getId().equals(user.getId())))
+                            || !offer.getType() && (offer.getReceiver()==null
+                            || !offer.getReceiver().getId().equals(user.getId()))))
                     .collect(Collectors.toList());
         } catch (JAXBException ignored) {
             return null;
@@ -138,7 +141,8 @@ public class OfferXmlServiceImpl implements OfferService {
         try {
             Database database = DatabaseXmlParser.readFromXmlFile();
             return database.getOffers().stream()
-                    .filter(offer -> offer.getType() && offer.getGiver().getId().equals(user.getId()))
+                    .filter(offer -> offer.getGiver()!=null
+                            && offer.getGiver().getId().equals(user.getId()))
                     .collect(Collectors.toList());
         } catch (JAXBException ignored) {
             return null;
@@ -150,7 +154,8 @@ public class OfferXmlServiceImpl implements OfferService {
         try {
             Database database = DatabaseXmlParser.readFromXmlFile();
             return database.getOffers().stream()
-                    .filter(offer -> !offer.getType() && offer.getReceiver().getId().equals(user.getId()))
+                    .filter(offer -> offer.getReceiver()!=null
+                            && offer.getReceiver().getId().equals(user.getId()))
                     .collect(Collectors.toList());
         } catch (JAXBException ignored) {
             return null;
