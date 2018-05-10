@@ -47,8 +47,7 @@ public class User {
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @XmlElementWrapper(name = "given_times_to_others")
-    @XmlElement(name = "given_time_to_other")
+    @XmlTransient
     @JsonIgnore
     private List<Offer> givenTimesToOthers;
 
@@ -56,8 +55,7 @@ public class User {
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @XmlElementWrapper(name = "times_taken_from_others")
-    @XmlElement(name = "given_time_from_other")
+    @XmlTransient
     @JsonIgnore
     private List<Offer> timesTakenFromOthers;
 

@@ -64,7 +64,7 @@ public class OfferController {
 
         if (selectedOffer.getReceiver() == null)
             selectedOffer.setReceiver(loggedUser);
-        else if (selectedOffer.getGiver() == null)
+        else
             selectedOffer.setGiver(loggedUser);
 
         offerService.save(selectedOffer);
@@ -74,8 +74,6 @@ public class OfferController {
     // Oferty (POST):
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = {APPLICATION_JSON_VALUE})
     public Offer saveOffer(@RequestBody String stringToParse) {
-        System.out.println(stringToParse);
-
         JSONParser parser = new JSONParser();
         try {
             JSONObject json = (JSONObject) parser.parse(stringToParse);
@@ -106,7 +104,6 @@ public class OfferController {
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE}, value = "/delete/{id}",
             produces = {APPLICATION_JSON_VALUE})
     public void delete(@PathVariable Integer id) {
-        Offer offer = offerService.find(id);
-        offerService.delete(offer);
+        offerService.delete(id);
     }
 }

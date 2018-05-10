@@ -12,7 +12,7 @@ public class TimeBankApplication {
      * - database: Remote MySql Database R/W,
      * - file: Local Xml R/W.
      */
-    public static final String READ_WRITE_MODE = "database";
+    public static final String READ_WRITE_MODE = "memory";
 
     public static final String DATABASE_PATH = "D:\\time_bank_database.xml";
 

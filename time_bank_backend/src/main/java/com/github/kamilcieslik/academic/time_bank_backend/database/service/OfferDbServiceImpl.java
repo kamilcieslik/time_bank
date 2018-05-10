@@ -85,7 +85,6 @@ public class OfferDbServiceImpl implements OfferService {
 
     @Override
     public List<Offer> findActiveOffers(User user) {
-        System.out.println(user);
         try {
             return offerRepository.findOffersByGiverIsNullOrReceiverIsNull().stream()
                     .filter(offer -> ((offer.getType()
